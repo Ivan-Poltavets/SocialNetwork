@@ -1,6 +1,8 @@
-var builder = WebApplication.CreateBuilder(args);
+using SocialNetwork.Infrastructure;
 
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddStorage(builder.Configuration);
 
 var app = builder.Build();
 
