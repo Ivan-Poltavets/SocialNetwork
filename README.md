@@ -1,7 +1,5 @@
 # Feature list
 
-Users authentication and authorization (username unique)
-
 User's page
 
 Add/update/delete information to users page
@@ -19,7 +17,7 @@ Add user to subscription
 Add user to friend list
 
 
-Recommended page(Recently added posts, images, videos)
+Main page(Recently added posts, images, videos)
 
 Add/update/delete comments on content
 

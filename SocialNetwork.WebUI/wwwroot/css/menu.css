@@ -1,0 +1,49 @@
+﻿.menu {
+    position: absolute;
+    width: 160px;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-right: 1px solid #000000;
+}
+
+.menu_item {
+    position: absolute;
+    width: 140px;
+    height: 40px;
+    background: #FFFFFF;
+    border-radius: 14px;
+}
+
+a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    text-decoration: none;
+    color:#000000;
+}
+
+.main_page_item {
+    left: 10px;
+    top: 120px;
+}
+
+.search_query_item {
+    left: 10px;
+    top: 170px;
+}
+
+.messages_item {
+    left: 10px;
+    top: 220px;
+}
+
+.profile_item {
+    left: 10px;
+    top: 270px;
+}
+
