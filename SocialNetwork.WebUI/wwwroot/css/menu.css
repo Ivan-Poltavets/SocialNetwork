@@ -17,14 +17,18 @@
     border-radius: 14px;
 }
 
-a {
+nav a {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
     text-decoration: none;
-    color:#000000;
+    color: #000000;
+}
+
+nav a:hover{
+    color: #000000;
 }
 
 .main_page_item {
