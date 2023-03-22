@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SocialNetwork.Core.Interfaces;
 using SocialNetwork.Infrastructure.Data;
+using SocialNetwork.Infrastructure.Repository;
 
 namespace SocialNetwork.Infrastructure;
 
@@ -13,5 +15,7 @@ public static class RegistrationExtensions
         {
             options.UseSqlServer(configuration["ConnectionStrings:LocalSqlServer"]);
         });
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }
