@@ -6,7 +6,6 @@ namespace SocialNetwork.Infrastructure.Repository;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
-    private bool _disposed;
     private Dictionary<Type, object> _repositories;
 
     public UnitOfWork(ApplicationDbContext context)
@@ -17,7 +16,7 @@ public class UnitOfWork : IUnitOfWork
 
     public void Dispose()
     {
-        Dispose(true);
+        _context.Dispose();
         GC.SuppressFinalize(this);
     }
 
@@ -34,26 +33,8 @@ public class UnitOfWork : IUnitOfWork
         return repository;
     }
 
-    public void SaveChanges()
-    {
-        _context.SaveChanges();
-    }
-
     public async Task SaveChangesAsync()
     {
         await _context.SaveChangesAsync();
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!_disposed)
-        {
-            if (disposing)
-            {
-                _context.Dispose();
-            }
-
-            _disposed = true;
-        }
     }
 }
