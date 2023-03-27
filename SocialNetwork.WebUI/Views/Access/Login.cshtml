@@ -1,0 +1,16 @@
+﻿@{
+    Layout = null;
+}
+@model LoginDto
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<div class="container">
+    <form asp-controller="Access" asp-action="Login" method="post">
+        <h1>Login</h1>
+        <label asp-for="UserName">UserName</label>
+        <input class="form-control" asp-for="UserName"/>
+        <laber asp-for="Password">Password</laber>
+        <input class="form-control" type="password" asp-for="Password"/>
+        <button class="btn-primary" type="submit">Login</button>
+    </form>
+    <a asp-action="Registration">Register</a>
+</div>

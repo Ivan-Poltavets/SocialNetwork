@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+@model RegistrationDto
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<div class="container">
+    <form asp-controller="Access" asp-action="Registration" method="post">
+        <h1>Registration</h1>
+        <label asp-for="FirstName"></label>
+        <input class="form-control" asp-for="FirstName" />
+        <label asp-for="LastName"></label>
+        <input class="form-control" asp-for="LastName" />
+        <label asp-for="UserName"></label>
+        <input class="form-control" asp-for="UserName" />
+        <label asp-for="Email"></label>
+        <input class="form-control" type="email" asp-for="Email" />
+        <label asp-for="PhoneNumber"></label>
+        <input class="form-control" asp-for="PhoneNumber"/>
+        <label asp-for="BirthDate"></label>
+        <input class="form-control" type="date" asp-for="BirthDate" />
+        <label asp-for="Bio"></label>
+        <input class="form-control" asp-for="Bio"/>
+        <label asp-for="Interests"></label>
+        <input class="form-control" asp-for="Interests" />
+        <label asp-for="Password"></label>
+        <input class="form-control" type="password" asp-for="Password" />
+        <button class="btn-primary" type="submit">Register</button>
+    </form>
+</div>
