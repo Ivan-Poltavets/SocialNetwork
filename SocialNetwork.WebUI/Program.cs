@@ -12,7 +12,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 builder.Services.AddStorage(builder.Configuration);
+builder.Services.AddMapper();
 builder.Services.AddScoped<AccessService>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<User>?
+<div class="modal-content w-50" style="display:">
+    <input id="searchField" class="form-control mb-1" type="text" name="searchQuery"/>
+    <div class="modal-body">
+        @if (Model != null)
+        {
+            foreach(var item in Model)
+            {
+                <div>
+                    <p>@item.UserName</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $('#searchField').on('change', function(){
+        $.get(`/Users/Search/${this.value}`, function(data, status){
+            for(let i = 0; i < data.length; i++){
+                $('.modal-body').append(data[i].userName);
+            }
+        });
+    });
+</script>

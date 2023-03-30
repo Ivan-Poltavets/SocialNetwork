@@ -19,6 +19,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     public IQueryable<TEntity> Get(int pageIndex = 0, int itemCount = 10)
     {
         return _dbSet
+            .AsNoTracking()
             .Skip(pageIndex * itemCount)
             .Take(itemCount);
     }

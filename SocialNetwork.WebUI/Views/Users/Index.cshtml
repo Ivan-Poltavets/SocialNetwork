@@ -1,0 +1,27 @@
+﻿@using System.Security.Claims;
+
+@model UserInformationDto
+
+
+<div class="container">
+    @if (string.IsNullOrEmpty(Model.ImageName))
+    {
+        <img class="w-25 h-25" id="userImage" src="~/icons/user.png" />
+    }
+    else
+    {
+        <img id="userImage" class="w-25 h-25" src="/Users/GetUserImage/@Model.UserName" />
+    }
+
+    <p>@Model.UserName</p>
+    <p>@Model.FirstName</p>
+    <p>@Model.LastName</p>
+    <p>@DateOnly.FromDateTime(Model.BirthDate)</p>
+    <p>@Model.PhoneNumber</p>
+    <p>@Model.Bio</p>
+    <p>@Model.Interests</p>
+    @if (User.FindFirst(ClaimTypes.Name).Value == Model.UserName)
+    {
+        <a asp-action="Edit">Edit profile</a>
+    }
+</div>
