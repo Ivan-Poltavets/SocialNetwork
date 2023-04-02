@@ -1,0 +1,41 @@
+﻿.profile{
+    display:flex;
+    flex-direction:column;
+}
+
+.profile_header{
+    padding-top:30px;
+    padding-left:400px;
+    display:flex;
+    flex-direction:row;
+}
+
+#userImage{
+    width:150px;
+    height:150px;
+    border-radius: 100px;
+}
+
+.display-row{
+    display:flex;
+    flex-direction:row;
+}
+
+.paragraph{
+    font-size:22px;
+    font-weight:400;
+    margin-top:6px;
+    padding-right:50px;
+}
+
+.profile_info{
+    margin-left:50px;
+}
+
+.name{
+    margin-right:15px;
+}
+
+.font-size-18{
+    font-size:18px;
+}

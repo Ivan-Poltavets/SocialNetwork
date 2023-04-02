@@ -4,9 +4,7 @@
     height: 100vh;
     left: 0px;
     top: 0px;
-    box-sizing: border-box;
     background: #FFFFFF;
-    border-right: 1px solid #000000;
 }
 
 .menu_item {
@@ -18,9 +16,7 @@
 }
 
 nav a {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 18px;
     line-height: 20px;
     text-decoration: none;
@@ -51,3 +47,7 @@ nav a:hover{
     top: 270px;
 }
 
+.logout_item{
+    top: 900px;
+    left: 10px;
+}

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Core.Dtos;
+using SocialNetwork.Core.Entities;
 using SocialNetwork.Core.Services;
 using System.Security.Claims;
 
@@ -10,8 +11,8 @@ namespace SocialNetwork.WebUI.Controllers
     public class UsersController : Controller
     {
         private readonly UserService _userService;
-        private int UserId => int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-        private string UserName => User.FindFirst(ClaimTypes.Name).Value;
+        private int _userId => int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        private string _userName => User.FindFirst(ClaimTypes.Name).Value;
 
         public UsersController(UserService userService)
         {
@@ -27,26 +28,22 @@ namespace SocialNetwork.WebUI.Controllers
 
         public async Task<IActionResult> Edit()
         {
-            var user = await _userService.GetUserInformationAsync(UserName);
+            var user = await _userService.GetUserInformationAsync(_userName);
             return View(user);
         }
 
-        public IActionResult Search()
-        {
-            return PartialView();
-        }
+        public IActionResult Search(List<User>? users) =>
+            View(users);
 
-        [HttpGet("[controller]/[action]/{query}")]
-        public IActionResult Search(string query)
-        {
-            return Ok(_userService.SearchUsers(query));
-        }
+        [HttpPost]
+        public IActionResult Search(string query) =>
+            View(_userService.SearchUsers(query));
 
         [HttpPost]
         public async Task<IActionResult> UpdateUserInformation(UserInformationDto userInformationDto)
         {
-            await _userService.UpdateUserInformationAsync(UserId, userInformationDto);
-            return RedirectToAction("Index", UserName);
+            await _userService.UpdateUserInformationAsync(_userId, userInformationDto);
+            return Redirect($"/Users/Index/{_userName}");
         }
 
         [HttpPost]
@@ -60,9 +57,9 @@ namespace SocialNetwork.WebUI.Controllers
                     formFile.CopyTo(item);
                     fileByteArray = item.ToArray();
                 }
-                await _userService.UpdateUserImageAsync(UserId, Path.GetExtension(formFile.FileName), fileByteArray);
+                await _userService.UpdateUserImageAsync(_userId, Path.GetExtension(formFile.FileName), fileByteArray);
             }
-            return RedirectToAction("Index", UserName);
+            return Redirect($"/Users/Index/{_userName}");
         }
 
         [HttpGet("[controller]/[action]/{username}")]

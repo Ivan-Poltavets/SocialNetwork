@@ -1,27 +1,56 @@
 ﻿@using System.Security.Claims;
 
 @model UserInformationDto
+<link rel="stylesheet" href="~/css/Profile.css" />
+<div class="profile">
+    <div class="profile_header">
 
+        <form method="post" enctype="multipart/form-data" asp-controller="Users" asp-action="UploadUserImage">
+            @if (string.IsNullOrEmpty(Model.ImageName))
+            {
+                <img id="userImage" src="~/icons/user.png" />
+            }
+            else
+            {
+                <img id="userImage" src="/Users/GetUserImage/@Model.UserName" />
+            }
 
-<div class="container">
-    @if (string.IsNullOrEmpty(Model.ImageName))
-    {
-        <img class="w-25 h-25" id="userImage" src="~/icons/user.png" />
-    }
-    else
-    {
-        <img id="userImage" class="w-25 h-25" src="/Users/GetUserImage/@Model.UserName" />
-    }
-
-    <p>@Model.UserName</p>
-    <p>@Model.FirstName</p>
-    <p>@Model.LastName</p>
-    <p>@DateOnly.FromDateTime(Model.BirthDate)</p>
-    <p>@Model.PhoneNumber</p>
-    <p>@Model.Bio</p>
-    <p>@Model.Interests</p>
-    @if (User.FindFirst(ClaimTypes.Name).Value == Model.UserName)
-    {
-        <a asp-action="Edit">Edit profile</a>
-    }
+            <input id="fileInput" type="file" name="formFile" style="display:none" />
+            <button id="submitButton" type="submit" style="display:none"></button>
+        </form>
+        <div class="profile_info">
+            <div class="display-row">
+                <p class="paragraph">@Model.UserName</p>
+                <div class="button">
+                    @if (User.FindFirst(ClaimTypes.Name).Value == Model.UserName)
+                    {
+                        <a class="btn btn-dark" asp-action="Edit">Edit profile</a>
+                    }
+                </div>
+            </div>
+            <div class="display-row">
+                <p class="name font-size-18">@Model.FirstName</p>
+                <p class="name font-size-18">@Model.LastName</p>
+            </div>
+            <div class="display-row">
+                <p class="name">@DateOnly.FromDateTime(Model.BirthDate)</p>
+                <p class="name">@Model.Bio</p>
+                <p class="name">@Model.Interests</p>
+            </div>
+        </div>
+    </div>
+    <div class="profile_posts">
+    </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $('#userImage').on('click', function () {
+        $('#fileInput').trigger('click');
+    });
+
+    var input = document.getElementById('fileInput');
+    input.oninput = e => {
+        $('#submitButton').trigger('click');
+    }
+</script>

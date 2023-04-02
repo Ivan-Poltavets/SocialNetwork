@@ -1,21 +1,7 @@
 ﻿@model UserInformationDto
 
 <div class="container mt-2">
-    <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="UploadUserImage">
-        @if (string.IsNullOrEmpty(Model.ImageName))
-        {
-            <img class="w-25 h-25" id="userImage" src="~/icons/user.png" />
-        }
-        else
-        {
-            <img class="w-25 h-25" id="userImage" src="/Users/GetUserImage/@Model.UserName" />
-        }
-
-        <input id="fileInput" type="file" name="formFile" style="display:none" />
-        <button id="submitButton" type="submit" style="display:none"></button>
-    </form>
-    
-    <form asp-controller="User" asp-action="UpdateUserInformation">
+    <form asp-controller="Users" asp-action="UpdateUserInformation" method="post">
         <label asp-for="UserName"></label>
         <input class="form-control" asp-for="UserName" value="@Model.UserName" readonly />
         <label asp-for="FirstName"></label>
@@ -33,17 +19,6 @@
         <input class="form-control" asp-for="Bio" value="@Model.Bio" />
         <label asp-for="Interests"></label>
         <input class="form-control" asp-for="Interests" value="@Model.Interests" />
-        <button class="btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Save</button>
     </form>
 </div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $('#userImage').on('click', function () {
-        $('#fileInput').trigger('click');
-    });
-
-    var input = document.getElementById('fileInput');
-    input.oninput = e => {
-        $('#submitButton').trigger('click');
-    }
-</script>
