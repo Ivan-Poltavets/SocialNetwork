@@ -63,9 +63,9 @@ public class AccessController : Controller
         return RedirectToAction("Login", "Access");
     }
 
-    private async Task SignInAsync(string userId, string username)
+    private async Task SignInAsync(string userId, string userName)
     {
-        var claimsIdentity = _accessService.CreateClaimsIdentity(userId, username, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsIdentity = _accessService.CreateClaimsIdentity(userId, userName, CookieAuthenticationDefaults.AuthenticationScheme);
         var authenticationProperties = new AuthenticationProperties()
         {
             IsPersistent = true,

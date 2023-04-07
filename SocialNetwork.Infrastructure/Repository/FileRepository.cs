@@ -33,7 +33,9 @@ namespace SocialNetwork.Infrastructure.Repository
         public async Task DeleteAsync(string folder, string file)
         {
             _dropboxClient = new DropboxClient(_accessKey);
-            await _dropboxClient.Files.DeleteV2Async(folder + "/" + file);
+            if (!file.StartsWith("/"))
+                file = $"/{file}";
+            await _dropboxClient.Files.DeleteV2Async(folder + file);
             _dropboxClient.Dispose();
         }
 

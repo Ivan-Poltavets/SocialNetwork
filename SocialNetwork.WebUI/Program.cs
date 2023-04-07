@@ -15,6 +15,8 @@ builder.Services.AddStorage(builder.Configuration);
 builder.Services.AddMapper();
 builder.Services.AddScoped<AccessService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<FileService>();
 
 var app = builder.Build();
 

@@ -14,7 +14,7 @@
         <label asp-for="PhoneNumber"></label>
         <input class="form-control" asp-for="PhoneNumber" value="@Model.PhoneNumber" />
         <label asp-for="BirthDate"></label>
-        <input class="form-control" type="date" asp-for="BirthDate" value="@Model.BirthDate" />
+        <input class="form-control" type="date" asp-for="BirthDate" value="@Model.BirthDate.ToString("yyyy-MM-dd")" />
         <label asp-for="Bio"></label>
         <input class="form-control" asp-for="Bio" value="@Model.Bio" />
         <label asp-for="Interests"></label>

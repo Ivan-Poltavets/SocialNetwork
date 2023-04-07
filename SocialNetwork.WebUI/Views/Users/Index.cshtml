@@ -12,7 +12,7 @@
             }
             else
             {
-                <img id="userImage" src="/Users/GetUserImage/@Model.UserName" />
+                <img id="userImage" src="/Image/@Model.UserName" />
             }
 
             <input id="fileInput" type="file" name="formFile" style="display:none" />
@@ -20,7 +20,7 @@
         </form>
         <div class="profile_info">
             <div class="display-row">
-                <p class="paragraph">@Model.UserName</p>
+                <p id="username" class="paragraph">@Model.UserName</p>
                 <div class="button">
                     @if (User.FindFirst(ClaimTypes.Name).Value == Model.UserName)
                     {
@@ -40,17 +40,48 @@
         </div>
     </div>
     <div class="profile_posts">
+
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script>
-    $('#userImage').on('click', function () {
-        $('#fileInput').trigger('click');
-    });
 
-    var input = document.getElementById('fileInput');
-    input.oninput = e => {
-        $('#submitButton').trigger('click');
-    }
-</script>
+@section Scripts{
+    <script>
+        $('#userImage').on('click', function () {
+            $('#fileInput').trigger('click');
+        });
+
+        var username = document.getElementById("username").textContent;
+        var input = document.getElementById('fileInput');
+        input.oninput = e => {
+            $('#submitButton').trigger('click');
+        }
+
+        let createPost = (response) => {
+            for (let i = 0; i < response.length; i++) {
+                let div = document.createElement('div');
+                div.classList.add('card');
+                div.style = 'width:16rem;height:16rem;';
+
+                let image = document.createElement('img');
+                image.classList.add('card-img-top');
+                image.style = 'width: 16rem;height: 15.9rem;';
+        
+                let file = response[i].fileName.split('/');
+                image.src = `/Image/${file[1]}/posts/${file[2]}`;
+                div.appendChild(image);
+                document.getElementsByClassName("profile_posts")[0].appendChild(div);
+            }
+        }
+
+        $.ajax({
+            url: `/Posts/GetUserPosts/${username}`,
+            type: 'GET',
+            success: function (response) {
+                createPost(response);
+            }
+        });
+
+        
+    </script>
+}

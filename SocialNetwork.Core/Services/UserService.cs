@@ -19,7 +19,17 @@ public class UserService
         _fileRepository = fileRepository;
     }
 
-    public async Task<UserInformationDto> GetUserInformationAsync(string username)
+    public int GetUserIdByUserName(string username)
+    {
+        var user = _userRepository.Find(x => x.UserName == username).SingleOrDefault();
+        if(user is null)
+        {
+            throw new Exception();
+        }
+        return user.Id;
+    }
+
+    public UserInformationDto GetUserInformation(string username)
     {
         var user = _userRepository.Find(x => x.UserName == username).SingleOrDefault();
         if(user is null)

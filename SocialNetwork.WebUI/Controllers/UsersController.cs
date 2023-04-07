@@ -8,11 +8,9 @@ using System.Security.Claims;
 namespace SocialNetwork.WebUI.Controllers
 {
     [Authorize]
-    public class UsersController : Controller
+    public class UsersController : AuthorizeController
     {
         private readonly UserService _userService;
-        private int _userId => int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-        private string _userName => User.FindFirst(ClaimTypes.Name).Value;
 
         public UsersController(UserService userService)
         {
@@ -20,15 +18,15 @@ namespace SocialNetwork.WebUI.Controllers
         }
 
         [HttpGet("[controller]/[action]/{username}")]
-        public async Task<IActionResult> Index(string username)
+        public async Task<IActionResult> Index(string userName)
         {
-            var user = await _userService.GetUserInformationAsync(username);
+            var user = _userService.GetUserInformation(userName);
             return View(user);
         }
 
         public async Task<IActionResult> Edit()
         {
-            var user = await _userService.GetUserInformationAsync(_userName);
+            var user = _userService.GetUserInformation(UserName);
             return View(user);
         }
 
@@ -42,8 +40,8 @@ namespace SocialNetwork.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateUserInformation(UserInformationDto userInformationDto)
         {
-            await _userService.UpdateUserInformationAsync(_userId, userInformationDto);
-            return Redirect($"/Users/Index/{_userName}");
+            await _userService.UpdateUserInformationAsync(UserId, userInformationDto);
+            return Redirect($"/Users/Index/{UserName}");
         }
 
         [HttpPost]
@@ -57,34 +55,11 @@ namespace SocialNetwork.WebUI.Controllers
                     formFile.CopyTo(item);
                     fileByteArray = item.ToArray();
                 }
-                await _userService.UpdateUserImageAsync(_userId, Path.GetExtension(formFile.FileName), fileByteArray);
+                await _userService.UpdateUserImageAsync(UserId, Path.GetExtension(formFile.FileName), fileByteArray);
             }
-            return Redirect($"/Users/Index/{_userName}");
+            return Redirect($"/Users/Index/{UserName}");
         }
 
-        [HttpGet("[controller]/[action]/{username}")]
-        public async Task<IActionResult> GetUserImage(string username)
-        {
-            var user = await _userService.GetUserInformationAsync(username);
-            var content = await _userService.GetUserImageAsync(username);
-            return File(content, GetImageMimeTypeFromFileExtension(Path.GetExtension(user.ImageName)));
-        }
-
-        private string GetImageMimeTypeFromFileExtension(string extension)
-        {
-            string mimetype = extension switch
-            {
-                ".png" => "image/png",
-                ".gif" => "image/gif",
-                ".jpg" or ".jpeg" => "image/jpeg",
-                ".bmp" => "image/bmp",
-                ".tiff" => "image/tiff",
-                ".wmf" => "image/wmf",
-                ".jp2" => "image/jp2",
-                ".svg" => "image/svg+xml",
-                _ => "application/octet-stream",
-            };
-            return mimetype;
-        }
+        
     }
 }

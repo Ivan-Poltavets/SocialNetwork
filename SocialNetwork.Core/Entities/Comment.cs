@@ -7,6 +7,6 @@ public class Comment
     public int UserId { get; set; }
     public string Text { get; set; } = string.Empty;
 
-    public virtual Post Post { get; set; }
+    public virtual UserPost Post { get; set; }
     public virtual User User { get; set; }
 }
