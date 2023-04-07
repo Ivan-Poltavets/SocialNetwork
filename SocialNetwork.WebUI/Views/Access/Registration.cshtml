@@ -3,27 +3,56 @@
 }
 @model RegistrationDto
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<div class="container">
-    <form asp-controller="Access" asp-action="Registration" method="post">
-        <h1>Registration</h1>
-        <label asp-for="FirstName"></label>
-        <input class="form-control" asp-for="FirstName" />
-        <label asp-for="LastName"></label>
-        <input class="form-control" asp-for="LastName" />
-        <label asp-for="UserName"></label>
-        <input class="form-control" asp-for="UserName" />
-        <label asp-for="Email"></label>
-        <input class="form-control" type="email" asp-for="Email" />
-        <label asp-for="PhoneNumber"></label>
-        <input class="form-control" asp-for="PhoneNumber"/>
-        <label asp-for="BirthDate"></label>
-        <input class="form-control" type="date" asp-for="BirthDate" />
-        <label asp-for="Bio"></label>
-        <input class="form-control" asp-for="Bio"/>
-        <label asp-for="Interests"></label>
-        <input class="form-control" asp-for="Interests" />
-        <label asp-for="Password"></label>
-        <input class="form-control" type="password" asp-for="Password" />
-        <button class="btn btn-primary" type="submit">Register</button>
-    </form>
-</div>
+<body class="text-center">
+    <div class="form-signin w-25 m-auto mt-5">
+        <form asp-controller="Access" asp-action="Registration" method="post">
+            <h1 class="h3 mb-3 fw-normal">Registration</h1>
+            <div class="form-floating">
+                <input class="form-control" asp-for="FirstName" id="floatingFirstName" />
+                <label asp-for="FirstName" for="floatingFirstName">First Name</label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" asp-for="LastName" id="floatingLastName" />
+                <label asp-for="LastName" for="floatingLastName">Last Name</label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" asp-for="UserName" id="floatingUserName" />
+                <label asp-for="UserName" for="floatingUserName">Username</label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" type="email" asp-for="Email" id="floatingEmail" />
+                <label asp-for="Email" for="floatingEmail"></label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" asp-for="PhoneNumber" id="floatingPhoneNumber"/>
+                <label asp-for="PhoneNumber" for="floatingPhoneNumber">Phone number</label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" type="date" asp-for="BirthDate" id="floatingBirthDate" />
+                <label asp-for="BirthDate" for="floatingBirthDate">Birth date</label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" asp-for="Bio" id="floatingBio" />
+                <label asp-for="Bio" for="floatingBio"></label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" asp-for="Interests" id="floatingInterests" />
+                <label asp-for="Interests" for="floatingInterests"></label>
+            </div>
+
+            <div class="form-floating">
+                <input class="form-control" type="password" asp-for="Password" id="floatingPassword" />
+                <label asp-for="Password" for="floatingPassword"></label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Register</button>
+        </form>
+    </div>
+</body>

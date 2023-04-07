@@ -1,24 +1,57 @@
 ﻿@model UserInformationDto
 
-<div class="container mt-2">
+<div class="container mt-4">
     <form asp-controller="Users" asp-action="UpdateUserInformation" method="post">
-        <label asp-for="UserName"></label>
-        <input class="form-control" asp-for="UserName" value="@Model.UserName" readonly />
-        <label asp-for="FirstName"></label>
-        <input class="form-control" asp-for="FirstName" value="@Model.FirstName" />
-        <label asp-for="LastName"></label>
-        <input class="form-control" asp-for="LastName" value="@Model.LastName" />
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="UserName">User name</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="UserName" value="@Model.UserName" readonly />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="FirstName">First name</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="FirstName" value="@Model.FirstName" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="LastName">Last name</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="LastName" value="@Model.LastName" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="Email"></label>
+            <div class="col-sm-10">
+                <input class="form-control" type="email" asp-for="Email" value="@Model.Email" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="PhoneNumber">Phone number</label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="PhoneNumber" value="@Model.PhoneNumber" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="BirthDate">Birth date</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="date" asp-for="BirthDate" value="@Model.BirthDate.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="Bio"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Bio" value="@Model.Bio" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" asp-for="Interests"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Interests" value="@Model.Interests" />
+            </div>
+        </div>
         <input class="form-control" type="hidden" asp-for="ImageName" value="@Model.ImageName" readonly />
-        <label asp-for="Email"></label>
-        <input class="form-control" type="email" asp-for="Email" value="@Model.Email" />
-        <label asp-for="PhoneNumber"></label>
-        <input class="form-control" asp-for="PhoneNumber" value="@Model.PhoneNumber" />
-        <label asp-for="BirthDate"></label>
-        <input class="form-control" type="date" asp-for="BirthDate" value="@Model.BirthDate.ToString("yyyy-MM-dd")" />
-        <label asp-for="Bio"></label>
-        <input class="form-control" asp-for="Bio" value="@Model.Bio" />
-        <label asp-for="Interests"></label>
-        <input class="form-control" asp-for="Interests" value="@Model.Interests" />
+ 
         <button class="btn btn-primary" type="submit">Save</button>
     </form>
 </div>
